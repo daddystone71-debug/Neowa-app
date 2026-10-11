@@ -1,0 +1,24 @@
+name: Build NEOWA APK
+
+on:
+  push:
+    branches: [ principal ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build PWA & Download APK
+        run: |
+          echo "Construction de l'APK en cours..."
+          curl -L -o app.apk "https://www.pwabuilder.com/api/download?url=https://daddystone71-debug.github.io/Neowa-app/&platform=android"
+          ls -lh
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: NEOWA-APK
+          path: app.apk
+          
